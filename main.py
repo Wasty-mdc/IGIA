@@ -9,7 +9,7 @@ import json
 from datetime import datetime
 from PIL import Image, ImageTk
 
-from src.image_generator import ImageGenerator
+from src.sd3_generator import SD3ImageGenerator
 from src.prompt_manager import PromptManager
 
 
@@ -30,7 +30,7 @@ class IGIAApp:
         self.selected_category = tk.StringVar(value="personajes")
         self.selected_animation = tk.StringVar()
         self.selected_bioma = tk.StringVar(value="ninguno")
-        self.resolution = tk.StringVar(value="512x512")
+        self.resolution = tk.StringVar(value="1024x1024")
         self.batch_size = tk.IntVar(value=1)
         
         # Crear interfaz
@@ -119,22 +119,22 @@ class IGIAApp:
         
         # Resolución
         ttk.Label(params_frame, text="Resolución:").grid(row=0, column=0, sticky=tk.W, pady=2)
-        resolutions = ["16x16", "32x32", "64x64", "128x128", "256x256", "512x512"]
+        resolutions = ["512x512", "768x768", "1024x1024", "1024x768", "768x1024"]
         res_combo = ttk.Combobox(params_frame, textvariable=self.resolution, 
                                 values=resolutions, state="readonly", width=15)
         res_combo.grid(row=0, column=1, sticky=tk.W, pady=2)
         
         # Steps
         ttk.Label(params_frame, text="Steps:").grid(row=1, column=0, sticky=tk.W, pady=2)
-        self.steps_var = tk.IntVar(value=50)
-        steps_spin = ttk.Spinbox(params_frame, from_=20, to=150, 
+        self.steps_var = tk.IntVar(value=40)
+        steps_spin = ttk.Spinbox(params_frame, from_=20, to=100, 
                                 textvariable=self.steps_var, width=15)
         steps_spin.grid(row=1, column=1, sticky=tk.W, pady=2)
         
         # Guidance Scale
         ttk.Label(params_frame, text="Guidance:").grid(row=2, column=0, sticky=tk.W, pady=2)
-        self.guidance_var = tk.DoubleVar(value=7.5)
-        guidance_spin = ttk.Spinbox(params_frame, from_=1.0, to=20.0, increment=0.5,
+        self.guidance_var = tk.DoubleVar(value=4.5)
+        guidance_spin = ttk.Spinbox(params_frame, from_=1.0, to=10.0, increment=0.5,
                                    textvariable=self.guidance_var, width=15)
         guidance_spin.grid(row=2, column=1, sticky=tk.W, pady=2)
         
@@ -229,16 +229,27 @@ class IGIAApp:
             return
         
         def load_thread():
-            self.log("🔄 Iniciando carga del modelo...")
+            self.log("🔄 Iniciando carga del modelo SD3.5...")
             self.model_status.config(text="Cargando...", foreground="orange")
             
-            self.image_generator = ImageGenerator()
+            # Cargar configuración de modelo
+            import json
+            config_path = "config/model_config.json"
+            try:
+                with open(config_path, 'r') as f:
+                    config = json.load(f)
+                    model_folder = config["model_config"]["model_folder"]
+            except:
+                model_folder = "ia/sd3.5-main/models"
+                self.log(f"⚠ Usando carpeta por defecto: {model_folder}")
+            
+            self.image_generator = SD3ImageGenerator(model_folder=model_folder)
             
             success = self.image_generator.load_model(callback=self.log)
             
             if success:
-                self.log("✅ Modelo cargado correctamente")
-                self.model_status.config(text="✅ Modelo cargado", foreground="green")
+                self.log("✅ Modelo SD3.5 cargado correctamente")
+                self.model_status.config(text="✅ SD3.5 Large cargado", foreground="green")
             else:
                 self.log("❌ Error al cargar el modelo")
                 self.model_status.config(text="❌ Error", foreground="red")

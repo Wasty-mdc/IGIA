@@ -1,10 +1,10 @@
 # IGIA - Generador de Imágenes con IA para Roguecat
 
-**IGIA** (Intelligent Game Image Artificer) es una herramienta de generación de imágenes con Inteligencia Artificial local, diseñada específicamente para crear assets de videojuegos en estilo pixel art de manera coherente y en serie.
+**IGIA** (Intelligent Game Image Artificer) es una herramienta de generación de imágenes con Inteligencia Artificial local, diseñada específicamente para crear assets de videojuegos en estilo pixel art de manera coherente y en serie usando **Stable Diffusion 3.5 Large**.
 
 ## 🎯 Características Principales
 
-- **✨ Generación con IA Local**: Usa Stable Diffusion localmente (sin necesidad de APIs de pago)
+- **✨ Generación con SD3.5 Large**: Usa el modelo más avanzado de Stability AI localmente
 - **🎨 Pre-prompts Configurables**: Mantén consistencia visual con templates predefinidos
 - **🎬 Generación en Serie**: Crea animaciones completas y múltiples variaciones
 - **📁 Categorías Organizadas**: Personajes, mapas, items, enemigos, etc.
@@ -15,18 +15,19 @@
 ## 📋 Requisitos del Sistema
 
 ### Hardware Recomendado
-- **GPU NVIDIA** con al menos 6GB de VRAM (para CUDA)
-  - RTX 3060 o superior (recomendado)
-  - GTX 1660 Ti o superior (mínimo)
-- **RAM**: 16GB recomendado (8GB mínimo)
-- **Espacio en disco**: ~10GB para el modelo + espacio para imágenes generadas
+- **GPU NVIDIA** con al menos **12GB de VRAM** (para SD3.5 Large)
+  - RTX 4070 Ti o superior (ideal)
+  - RTX 3080/3090 (recomendado)
+  - RTX 3060 12GB (mínimo, puede ser lento)
+- **RAM**: 16GB recomendado (32GB ideal)
+- **Espacio en disco**: ~20GB para modelos + espacio para imágenes generadas
 
 ### Software
 - **Windows 10/11** (64-bit)
 - **Python 3.10 o 3.11** (Python 3.12 puede tener problemas de compatibilidad)
-- **CUDA Toolkit 11.8 o 12.1** (si usas GPU NVIDIA)
+- **CUDA Toolkit 11.8 o 12.1** (para GPU NVIDIA)
 
-> ⚠️ **Nota**: Si no tienes GPU NVIDIA, el programa funcionará en CPU pero será considerablemente más lento (5-10 minutos por imagen vs 10-30 segundos con GPU).
+> ⚠️ **Nota**: SD3.5 Large requiere significativamente más VRAM que modelos anteriores. No se recomienda usar CPU.
 
 ## 🚀 Instalación
 
@@ -47,6 +48,32 @@
    ```
 2. Descarga CUDA Toolkit desde [nvidia.com/cuda-downloads](https://developer.nvidia.com/cuda-downloads)
 3. Instala siguiendo las instrucciones
+
+### Paso 3: Descargar el Modelo SD3.5 Large
+
+1. Ve a [Hugging Face - Stable Diffusion 3.5 Large](https://huggingface.co/stabilityai/stable-diffusion-3.5-large)
+2. Acepta la licencia de uso
+3. Descarga los siguientes archivos a la carpeta `ia/sd3.5-main/models/`:
+   - `clip_g.safetensors` (OpenCLIP bigG)
+   - `clip_l.safetensors` (OpenAI CLIP-L)
+   - `t5xxl.safetensors` (Google T5-v1.1-XXL)
+   - `sd3.5_large.safetensors` (Modelo principal, ~9.8GB)
+   - `sd3_vae.safetensors` (Opcional, VAE separado)
+
+La estructura debe quedar así:
+```
+IGIA/
+├── ia/
+│   └── sd3.5-main/
+│       ├── models/
+│       │   ├── clip_g.safetensors
+│       │   ├── clip_l.safetensors
+│       │   ├── t5xxl.safetensors
+│       │   ├── sd3.5_large.safetensors
+│       │   └── sd3_vae.safetensors (opcional)
+│       └── sd3_infer.py
+└── ...
+```
 
 ### Paso 3: Clonar/Descargar el Proyecto
 
@@ -72,17 +99,14 @@ python -m venv venv
 # Si da error de permisos, ejecuta esto primero:
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
-# Instalar dependencias
+# Instalar PyTorch con CUDA (si tienes GPU NVIDIA)
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+
+# Instalar el resto de dependencias
 pip install -r requirements.txt
 ```
 
 > ⏱️ **Nota**: La instalación puede tardar 10-20 minutos dependiendo de tu conexión.
-
-### Paso 5: Primera Descarga del Modelo
-
-El modelo de Stable Diffusion se descargará automáticamente la primera vez que lo cargues desde la aplicación. Necesitarás:
-- ~4GB de descarga
-- Conexión a internet estable
 
 ## 🎮 Uso Básico
 
@@ -100,24 +124,25 @@ python main.py
 
 1. **Cargar el Modelo**
    - Haz clic en "🔄 Cargar Modelo IA"
-   - Espera a que se descargue y cargue (solo la primera vez tomará más tiempo)
+   - Espera a que se cargue el modelo SD3.5 Large (puede tardar 1-2 minutos)
+   - Verás "✅ SD3.5 Large cargado" cuando esté listo
 
 2. **Configurar el Asset**
    - Selecciona una **Categoría** (personajes, mapas, items, etc.)
-   - Escribe la **Descripción Específica** (ej: "warrior with blue armor")
+   - Escribe la **Descripción Específica** (ej: "warrior with blue armor and magic sword")
    - (Opcional) Selecciona un **Bioma** para contexto adicional
 
 3. **Ajustar Parámetros**
-   - **Resolución**: 16x16, 32x32, 64x64, 128x128 (para pixel art)
-   - **Steps**: 50 es buen balance (más = mejor calidad pero más lento)
-   - **Guidance**: 7.5 recomendado (qué tan estricto seguir el prompt)
+   - **Resolución**: 512x512, 768x768, 1024x1024 (SD3.5 funciona mejor con resoluciones altas)
+   - **Steps**: 40 recomendado para SD3.5 Large (balance calidad/velocidad)
+   - **Guidance**: 4.5 recomendado para SD3.5 (el modelo funciona mejor con CFG bajo)
    - **Seed**: -1 para aleatorio, o un número fijo para reproducibilidad
    - **Cantidad**: Número de variaciones a generar
 
 4. **Generar**
    - Haz clic en "🎨 GENERAR IMÁGENES"
    - Observa el progreso en el log
-   - Las imágenes se guardarán en `output/`
+   - Las imágenes se guardarán en `output/` con su metadata
 
 ### Generación de Animaciones
 

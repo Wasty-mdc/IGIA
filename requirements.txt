@@ -1,15 +1,15 @@
-# Dependencias principales
+# Dependencias principales para SD3.5
 torch>=2.0.0
-diffusers>=0.21.0
-transformers>=4.30.0
-accelerate>=0.20.0
 safetensors>=0.3.1
+transformers>=4.30.0
 
 # Procesamiento de imágenes
 Pillow>=10.0.0
+numpy>=1.24.0
+
+# Utilidades para SD3.5
+fire>=0.5.0
+tqdm>=4.65.0
 
 # Interfaz gráfica (viene con Python)
 # tkinter (ya incluido en Python estándar)
-
-# Utilidades
-numpy>=1.24.0

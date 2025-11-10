@@ -1,0 +1,47 @@
+{
+  "model_config": {
+    "model_folder": "ia/sd3.5-main/models",
+    "model_name": "sd3.5_large.safetensors",
+    "vae_name": "sd3_vae.safetensors",
+    "clip_g": "clip_g.safetensors",
+    "clip_l": "clip_l.safetensors",
+    "t5xxl": "t5xxl.safetensors",
+    
+    "default_params": {
+      "width": 1024,
+      "height": 1024,
+      "steps": 40,
+      "guidance_scale": 4.5,
+      "sampler": "dpmpp_2m"
+    },
+    
+    "resolutions": {
+      "512x512": {"width": 512, "height": 512, "steps": 30},
+      "1024x1024": {"width": 1024, "height": 1024, "steps": 40},
+      "1024x768": {"width": 1024, "height": 768, "steps": 40},
+      "768x1024": {"width": 768, "height": 1024, "steps": 40}
+    }
+  },
+  
+  "instructions": {
+    "setup": [
+      "1. Descarga los archivos del modelo SD3.5 Large",
+      "2. Colócalos en la carpeta: ia/sd3.5-main/models/",
+      "3. Archivos necesarios:",
+      "   - clip_g.safetensors (OpenCLIP bigG)",
+      "   - clip_l.safetensors (OpenAI CLIP-L)",
+      "   - t5xxl.safetensors (Google T5-v1.1-XXL)",
+      "   - sd3.5_large.safetensors (Modelo principal)",
+      "   - sd3_vae.safetensors (Opcional, VAE separado)"
+    ],
+    "download_links": [
+      "Hugging Face: https://huggingface.co/stabilityai/stable-diffusion-3.5-large",
+      "Necesitas aceptar la licencia y descargar los archivos"
+    ],
+    "requirements": [
+      "GPU NVIDIA con al menos 12GB VRAM recomendado",
+      "CUDA instalado para usar GPU",
+      "Python 3.10 o superior"
+    ]
+  }
+}

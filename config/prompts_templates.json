@@ -1,53 +1,53 @@
 {
   "preprompts": {
     "personajes": {
-      "base": "pixel art, 2D sprite, roguelike game character, clean lines, simple shading, game asset, transparent background, centered character",
-      "estilo": "retro gaming style, 8-bit inspired, vibrant colors, clear silhouette",
-      "calidad": "high quality pixel art, sharp pixels, no blur, game ready"
+      "base": "pixel art sprite, 2D game character, roguelike game asset, clean pixel lines, transparent background, centered composition",
+      "estilo": "retro 16-bit style, vibrant colors, clear silhouette, fantasy RPG aesthetic",
+      "calidad": "professional pixel art, crisp edges, game-ready sprite, high contrast"
     },
     "mapas": {
-      "base": "pixel art tileset, 2D top-down view, roguelike dungeon, seamless tiles, game asset",
-      "estilo": "retro gaming style, dungeon crawler aesthetic, atmospheric",
-      "calidad": "high quality pixel art, tileable, sharp pixels, game ready"
+      "base": "pixel art tileset, 2D top-down dungeon tiles, roguelike environment, seamless tileable pattern",
+      "estilo": "dungeon crawler aesthetic, atmospheric lighting, fantasy dungeon theme",
+      "calidad": "seamless tiles, professional tileset, game-ready environment art"
     },
     "items": {
-      "base": "pixel art item, 2D sprite, game icon, clean design, transparent background, centered object",
-      "estilo": "roguelike item style, fantasy RPG, clear readable design",
-      "calidad": "high quality pixel art, sharp details, game ready icon"
+      "base": "pixel art item icon, 2D game object, inventory item sprite, transparent background, centered object",
+      "estilo": "fantasy RPG item design, collectible game asset, clear iconic shape",
+      "calidad": "clean pixel art icon, recognizable design, game UI ready"
     },
     "enemigos": {
-      "base": "pixel art enemy, 2D sprite, hostile creature, roguelike monster, transparent background, centered",
-      "estilo": "retro gaming monster, threatening appearance, clear silhouette",
-      "calidad": "high quality pixel art, sharp pixels, game ready enemy sprite"
+      "base": "pixel art enemy sprite, 2D hostile creature, roguelike monster, transparent background, battle-ready pose",
+      "estilo": "threatening monster design, fantasy enemy, distinctive character",
+      "calidad": "professional enemy sprite, clear readable design, game combat ready"
     }
   },
   "animaciones": {
     "personaje_idle": [
-      "character standing idle",
-      "character idle stance, slight movement"
+      "character standing in idle pose, slight breathing animation",
+      "character idle stance with subtle movement"
     ],
     "personaje_walk": [
-      "character walking left, side view",
-      "character walking right, side view",
-      "character walking forward, front view",
-      "character walking backward, back view"
+      "character walking animation, left foot forward",
+      "character walking animation, right foot forward", 
+      "character walking animation, front view step",
+      "character walking animation, back view step"
     ],
     "personaje_attack": [
-      "character attacking, sword swing",
-      "character attack pose, mid-swing",
-      "character attack recovery"
+      "character preparing attack, weapon raised",
+      "character mid-attack, weapon swinging",
+      "character attack follow-through, recovery pose"
     ],
     "personaje_jump": [
-      "character jumping up",
-      "character mid-air",
-      "character landing"
+      "character jumping up, legs bent",
+      "character mid-air jump, arms raised",
+      "character landing from jump"
     ],
     "personaje_hurt": [
-      "character taking damage, hurt pose",
-      "character recoiling from hit"
+      "character taking damage, recoiling backward",
+      "character hurt pose, defensive stance"
     ],
     "personaje_death": [
-      "character defeated, falling",
+      "character defeated, beginning to fall",
       "character death animation"
     ]
   },
