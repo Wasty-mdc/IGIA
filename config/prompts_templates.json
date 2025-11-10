@@ -1,0 +1,68 @@
+{
+  "preprompts": {
+    "personajes": {
+      "base": "pixel art, 2D sprite, roguelike game character, clean lines, simple shading, game asset, transparent background, centered character",
+      "estilo": "retro gaming style, 8-bit inspired, vibrant colors, clear silhouette",
+      "calidad": "high quality pixel art, sharp pixels, no blur, game ready"
+    },
+    "mapas": {
+      "base": "pixel art tileset, 2D top-down view, roguelike dungeon, seamless tiles, game asset",
+      "estilo": "retro gaming style, dungeon crawler aesthetic, atmospheric",
+      "calidad": "high quality pixel art, tileable, sharp pixels, game ready"
+    },
+    "items": {
+      "base": "pixel art item, 2D sprite, game icon, clean design, transparent background, centered object",
+      "estilo": "roguelike item style, fantasy RPG, clear readable design",
+      "calidad": "high quality pixel art, sharp details, game ready icon"
+    },
+    "enemigos": {
+      "base": "pixel art enemy, 2D sprite, hostile creature, roguelike monster, transparent background, centered",
+      "estilo": "retro gaming monster, threatening appearance, clear silhouette",
+      "calidad": "high quality pixel art, sharp pixels, game ready enemy sprite"
+    }
+  },
+  "animaciones": {
+    "personaje_idle": [
+      "character standing idle",
+      "character idle stance, slight movement"
+    ],
+    "personaje_walk": [
+      "character walking left, side view",
+      "character walking right, side view",
+      "character walking forward, front view",
+      "character walking backward, back view"
+    ],
+    "personaje_attack": [
+      "character attacking, sword swing",
+      "character attack pose, mid-swing",
+      "character attack recovery"
+    ],
+    "personaje_jump": [
+      "character jumping up",
+      "character mid-air",
+      "character landing"
+    ],
+    "personaje_hurt": [
+      "character taking damage, hurt pose",
+      "character recoiling from hit"
+    ],
+    "personaje_death": [
+      "character defeated, falling",
+      "character death animation"
+    ]
+  },
+  "biomas": {
+    "dungeon": "dark stone dungeon, torches, medieval castle interior",
+    "forest": "mystical forest, trees, grass, nature",
+    "cave": "underground cave, rocks, crystals, dark atmosphere",
+    "desert": "sand dunes, desert ruins, ancient structures",
+    "snow": "frozen landscape, ice, snow covered ground",
+    "lava": "volcanic area, lava pools, hot stones, fire"
+  },
+  "configuracion_default": {
+    "negative_prompt": "blurry, 3D, realistic, photograph, smooth gradient, anti-aliased, modern graphics, high poly",
+    "num_inference_steps": 50,
+    "guidance_scale": 7.5,
+    "seed": -1
+  }
+}

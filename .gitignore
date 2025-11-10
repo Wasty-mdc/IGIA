@@ -1,0 +1,28 @@
+# Ignora entorno virtual
+venv/
+env/
+*.pyc
+__pycache__/
+
+# Ignora caché de modelos (muy pesado)
+models/
+.cache/
+huggingface/
+
+# Ignora imágenes generadas (opcional - quita si quieres versionar)
+output/
+
+# Ignora archivos del sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ignora archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Ignora logs
+*.log
